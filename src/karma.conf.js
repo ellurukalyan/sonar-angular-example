@@ -20,11 +20,11 @@ module.exports = function (config) {
     client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true,
-      skipFilesWithNoCoverage: false,
+      dir: require('path').join(__dirname, './coverage/ng-azure-devops'),
+      reports: ['html', 'lcovonly', 'text-summary', 'cobertura'],
+      fixWebpackSourcePaths: true
     },
       
     reporters: ['progress', 'kjhtml', 'junit'],
