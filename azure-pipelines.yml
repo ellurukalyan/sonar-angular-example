@@ -66,3 +66,25 @@ steps:
       testRunTitle: Angular_E2E
       testResultsFormat: JUnit
       testResultsFiles: "**/junit*.xml"
+
+  - task: SonarQubePrepare@4
+    inputs:
+      SonarQube: 'sonar-new'
+      scannerMode: 'CLI'
+      configMode: 'file'
+      extraProperties: |
+        # Additional properties that will be passed to the scanner, 
+        # Put one key=value per line, example:
+        # sonar.exclusions=**/*.bin
+          sonar.organization=lqc-github
+            sonar.projectKey=sonar-angular-example
+            sonar.projectName=SonarQube + Angular Example
+            sonar.projectVersion=1.0.0
+            sonar.sourceEncoding=UTF-8
+            sonar.sources=src/
+        sonar.typescript.lcov.reportPaths=coverage/lcov.info
+            sonar.coverage.exclusions=**/*.spec.ts,src/environments/*,src/karma.conf.js		
+  
+  - task: SonarQubePublish@4
+    inputs:
+      pollingTimeoutSec: '300'
