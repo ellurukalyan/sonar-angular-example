@@ -23,3 +23,6 @@ steps:
 
 - script: npm install puppeteer --save-dev
   displayName: 'Install puppeteer'
+
+- script: npx ng test --watch=false
+  displayName: 'Tests'
