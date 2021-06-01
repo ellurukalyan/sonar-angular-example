@@ -44,7 +44,7 @@ steps:
   displayName: 'Test Angular'
   inputs:
     command: custom
-    customCommand: --watch false --source-map true --code-coverage
+    customCommand: ng test --watch false --source-map true --code-coverage
     workingDir: src
 
 - task: PublishCodeCoverageResults@1
