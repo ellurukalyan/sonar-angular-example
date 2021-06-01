@@ -34,3 +34,10 @@ steps:
     # Make sure you've changed testResultsFiles to the one below 
     testResultsFiles: '**/TESTS-*.xml'
   displayName: 'Publish Test Results'
+
+- task: PublishCodeCoverageResults@1
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/ng-azure-devops/cobertura-coverage.xml'
+  displayName: 'Publish Code Coverage Results'
