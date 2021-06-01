@@ -26,47 +26,6 @@ steps:
       customCommand: ng test --watch false --source-map true --code-coverage
       workingDir: 'src'
 
-  - task: PublishCodeCoverageResults@1
-    displayName: 'Publish code coverage Angular results'
-    condition: succeededOrFailed()
-    inputs:
-      codeCoverageTool: Cobertura
-      summaryFileLocation: 'src/coverage/cobertura-coverage.xml'
-      reportDirectory: src/coverage
-      failIfCoverageEmpty: true
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Angular test results'
-    condition: succeededOrFailed()
-    inputs:
-      searchFolder: $(System.DefaultWorkingDirectory)/src/
-      testRunTitle: Angular
-      testResultsFormat: JUnit
-      testResultsFiles: "**/TESTS*.xml"
-
-  - task: NodeTool@0
-    displayName: 'Lint Angular'
-    inputs:
-      command: custom
-      customCommand: run lint --  --format=stylish
-      workingDir: src
-
-  - task: NodeTool@0
-    displayName: 'E2E Test Angular'
-    inputs:
-      command: custom
-      customCommand: run e2e
-      workingDir: src
-
-  - task: PublishTestResults@2
-    displayName: 'Publish Angular E2E test results'
-    condition: succeededOrFailed()
-    inputs:
-      searchFolder: $(System.DefaultWorkingDirectory)/e2e/
-      testRunTitle: Angular_E2E
-      testResultsFormat: JUnit
-      testResultsFiles: "**/junit*.xml"
-
   - task: SonarQubePrepare@4
     inputs:
       SonarQube: 'sonar-new'
