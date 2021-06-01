@@ -25,6 +25,19 @@ module.exports = function (config) {
       fixWebpackSourcePaths: true,
       skipFilesWithNoCoverage: false,
     },
+    
+    module.exports = function (config) {
+  config.set({
+    ...
+    plugins: [
+      ...,
+      require('karma-junit-reporter')
+    ],
+    ...,
+    reporters: ['progress', 'kjhtml', 'junit'],
+    ...
+  });
+};    
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
