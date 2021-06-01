@@ -21,36 +21,11 @@ steps:
 - script: npx ng build --prod
   displayName: 'Build'
 
-- script: npm install puppeteer --save-dev
-  displayName: 'Install puppeteer'
-
-- script: npm install karma-junit-reporter --save-dev
-  displayName: 'Install puppeteer'
-
-- script: npx ng test --watch=false
-  displayName: 'Tests'
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFormat: 'JUnit'
-    # Make sure you've changed testResultsFiles to the one below 
-    testResultsFiles: '**/TESTS-*.xml'
-  displayName: 'Publish Test Results'
-
-- task: PublishCodeCoverageResults@1
-  condition: succeededOrFailed()
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/ng-azure-devops/cobertura-coverage.xml'
-  displayName: 'Publish Code Coverage Results'
-
-- script: npx ng test --watch=false --codeCoverage=true
-  displayName: 'Tests'
-
 - script: npm install -g tslint
   displayName: 'Code Analysis'
 
+- script: tslint -c tslint.json 'src/*.ts'
+  displayName: 'Code Analysis report'
 
 - task: SonarQubePrepare@4
   inputs:
@@ -62,7 +37,7 @@ steps:
         # Put one key=value per line, example:
         # sonar.exclusions=**/*.bin
           sonar.organization=lqc-github
-            sonar.projectKey=sonar-angular-example
+            sonar.projectKey=Angular-Js-new_Angular-Js-new
             sonar.projectName=SonarQube + Angular Example
             sonar.projectVersion=1.0.0
             sonar.sourceEncoding=UTF-8
