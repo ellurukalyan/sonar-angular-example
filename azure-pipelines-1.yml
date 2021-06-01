@@ -48,8 +48,9 @@ steps:
 - script: npx ng test --watch=false --codeCoverage=true
   displayName: 'Tests'
 
-- script: npx ng lint
+- script: npm install -g tslint
   displayName: 'Code Analysis'
+
 
 - task: SonarQubePrepare@4
   inputs:
@@ -66,6 +67,7 @@ steps:
             sonar.projectVersion=1.0.0
             sonar.sourceEncoding=UTF-8
             sonar.sources=src/
+            sonar.typescript.tslint.reportPaths=src/tslint.json
         sonar.typescript.lcov.reportPaths=coverage/lcov.info
             sonar.coverage.exclusions=**/*.spec.ts,src/environments/*,src/karma.conf.js		
   
