@@ -21,31 +21,9 @@ steps:
 - script: npx ng build --prod
   displayName: 'Build'
 
-- script: npm install -g tslint typescript
-  displayName: 'Code Analysis'
-
-- script: tslint -c tslint.json 'src/*.ts'
-  displayName: 'Code Analysis report'
-
-- task: SonarQubePrepare@4
+- task: CmdLine@2
   inputs:
-      SonarQube: 'sonar-new'
-      scannerMode: 'CLI'
-      configMode: 'file'
-      extraProperties: |
-        # Additional properties that will be passed to the scanner, 
-        # Put one key=value per line, example:
-        # sonar.exclusions=**/*.bin
-          sonar.organization=lqc-github
-            sonar.projectKey=Angular-Js-new_Angular-Js-new
-            sonar.projectName=SonarQube + Angular Example
-            sonar.projectVersion=1.0.0
-            sonar.sourceEncoding=UTF-8
-            sonar.sources=src/
-            sonar.typescript.tslint.reportPaths=src/tslint.json
-        sonar.typescript.lcov.reportPaths=coverage/lcov.info
-            sonar.coverage.exclusions=**/*.spec.ts,src/environments/*,src/karma.conf.js		
-  
-- task: SonarQubePublish@4
-  inputs:
-      pollingTimeoutSec: '300'
+    script: |
+      npm install -g tslint typescript
+      tslint --project ./tsconfig.json
+    failOnStderr: true
