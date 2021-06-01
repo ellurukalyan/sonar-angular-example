@@ -23,5 +23,5 @@ steps:
     displayName: 'Test Angular'
     inputs:
       command: custom
-      customCommand: run ng test --watch false --source-map true --code-coverage
+      customCommand: ng test --watch false --source-map true --code-coverage
       workingDir: 'src'
