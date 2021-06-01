@@ -24,6 +24,9 @@ steps:
 - script: npm install puppeteer --save-dev
   displayName: 'Install puppeteer'
 
+- script: npm install karma-junit-reporter --save-dev
+  displayName: 'Install puppeteer'
+
 - script: npx ng test --watch=false
   displayName: 'Tests'
 
