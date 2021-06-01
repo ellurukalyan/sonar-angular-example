@@ -11,12 +11,13 @@ variables:
   ngBuildConfiguration: '--prod'
 
 steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 12.x
+    displayName: 'Install Node.js'
 
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    command: install
-    workingDir: src
+  - script: npm install && npm install -g @angular/cli
+    displayName: 'Install dependencies'
 
 - task: Npm@1
   displayName: 'Test Angular'
