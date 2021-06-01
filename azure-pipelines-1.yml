@@ -21,7 +21,7 @@ steps:
 - script: npx ng build --prod
   displayName: 'Build'
 
-- script: npm install -g tslint
+- script: npm install -g tslint typescript
   displayName: 'Code Analysis'
 
 - script: tslint -c tslint.json 'src/*.ts'
