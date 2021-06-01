@@ -28,17 +28,17 @@ steps:
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: angular8PipelineArtifactProd
-    targetPath: 'src/dist'
+    targetPath: 'src'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'src/dist'
+    PathtoPublish: 'src'
     ArtifactName: angular8BuildArtifactProd
 
 - task: DeleteFiles@1
   displayName: 'Delete Build files'
   inputs:
-    Contents: 'src/dist'
+    Contents: 'src'
 
 - task: Npm@1
   displayName: 'Test Angular'
